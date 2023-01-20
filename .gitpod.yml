@@ -5,8 +5,10 @@ tasks:
   # https://github.com/erosson/multiplayer/settings/secrets/actions
   - before: |
       ./.gp/install-kubectl.sh
-      ./.gp/install-helm.sh
       ./.gp/config-kube.sh
+      ./.gp/install-helm.sh
+      ./.gp/install-argocd-cli.sh
     command: |
-      kubectl version --client
-      helm version --client
+      kubectl version
+      helm version
+      argocd version
