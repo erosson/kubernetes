@@ -1,3 +1,5 @@
+# http://k8s-test-hello1.erosson.org/
+#
 # based on https://www.linode.com/docs/guides/how-to-deploy-nginx-ingress-on-linode-kubernetes-engine/
 #
 # also learned from https://mbuffett.com/posts/kubernetes-setup/
@@ -40,7 +42,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-new-ingress
+  name: hello-one
   annotations:
     external-dns.alpha.kubernetes.io/hostname: k8s-test-hello1.erosson.org
     kubernetes.io/ingress.class: nginx
