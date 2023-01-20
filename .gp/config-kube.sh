@@ -4,3 +4,4 @@
 set -eu
 mkdir -p $HOME/.kube
 echo $KUBE_CONFIG | base64 -di > $HOME/.kube/config
+chmod 600 $HOME/.kube/config

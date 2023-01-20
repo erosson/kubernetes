@@ -4,7 +4,9 @@ tasks:
   # https://gitpod.io/variables
   # https://github.com/erosson/multiplayer/settings/secrets/actions
   - before: |
-      ./install-kubectl.sh
-      ./config-kube.sh
+      ./.gp/install-kubectl.sh
+      ./.gp/install-helm.sh
+      ./.gp/config-kube.sh
     command: |
       kubectl version --client
+      helm version --client
