@@ -1,0 +1,58 @@
+# https://test-letsencrypt-staging.erosson.org/
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-letsencrypt-staging
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: test-letsencrypt-staging
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-letsencrypt-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-letsencrypt-staging
+  template:
+    metadata:
+      labels:
+        app: test-letsencrypt-staging
+    spec:
+      containers:
+      - name: hello
+        image: nginxdemos/hello
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-letsencrypt-staging
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    external-dns.alpha.kubernetes.io/hostname: test-letsencrypt-staging.erosson.org
+    # external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  tls:
+    - secretName: test-letsencrypt-staging-tls
+      hosts:
+        - test-letsencrypt-staging.erosson.org
+  rules:
+  - host: test-letsencrypt-staging.erosson.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: test-letsencrypt-staging
+            port:
+              number: 80

@@ -1,0 +1,58 @@
+# https://test-letsencrypt-cfproxy.erosson.org/
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-letsencrypt-cfproxy
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: test-letsencrypt-cfproxy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-letsencrypt-cfproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-letsencrypt-cfproxy
+  template:
+    metadata:
+      labels:
+        app: test-letsencrypt-cfproxy
+    spec:
+      containers:
+      - name: hello
+        image: nginxdemos/hello
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-letsencrypt-cfproxy
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    external-dns.alpha.kubernetes.io/hostname: test-letsencrypt-cfproxy.erosson.org
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - secretName: test-letsencrypt-cfproxy-tls
+      hosts:
+        - test-letsencrypt-cfproxy.erosson.org
+  rules:
+  - host: test-letsencrypt-cfproxy.erosson.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: test-letsencrypt-cfproxy
+            port:
+              number: 80
