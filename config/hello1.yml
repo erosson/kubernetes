@@ -1,4 +1,7 @@
-# https://www.linode.com/docs/guides/how-to-deploy-nginx-ingress-on-linode-kubernetes-engine/
+# based on https://www.linode.com/docs/guides/how-to-deploy-nginx-ingress-on-linode-kubernetes-engine/
+#
+# also learned from https://mbuffett.com/posts/kubernetes-setup/
+# https://news.ycombinator.com/item?id=26502900
 apiVersion: v1
 kind: Service
 metadata:
