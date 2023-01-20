@@ -1,0 +1,55 @@
+# https://www.linode.com/docs/guides/how-to-deploy-nginx-ingress-on-linode-kubernetes-engine/
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-two
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: k8s-test-hello2.erosson.org
+    #external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: hello-two
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-two
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-two
+  template:
+    metadata:
+      labels:
+        app: hello-two
+    spec:
+      containers:
+      - name: hello-ingress
+        image: nginxdemos/hello
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-new-ingress2
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: k8s-test-hello2.erosson.org
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: k8s-test-hello2.erosson.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello-two
+            port:
+              number: 80
