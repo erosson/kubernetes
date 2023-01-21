@@ -14,5 +14,3 @@ tasks:
       echo "alias argocd='argocd --port-forward-namespace argocd'" >> ~/.bashrc
     command: |
       kubectl version
-      helm version
-      argocd version
