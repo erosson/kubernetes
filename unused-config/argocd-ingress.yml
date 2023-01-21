@@ -1,3 +1,6 @@
+# This works fine - but it's safer to run ./argocd-ui.sh from gitpod whenever I
+# want the UI, and I don't think it'll be too inconvenient for my one-man show
+# 
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#kubernetesingress-nginx
 # https://argo-cd.readthedocs.io/en/stable/getting_started/
 #
