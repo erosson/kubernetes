@@ -8,6 +8,10 @@ tasks:
       ./.gp/config-kube.sh
       ./.gp/install-helm.sh
       ./.gp/install-argocd-cli.sh
+      ./argocd/auth.sh
+      ./.gp/install-argocd-image-updater-cli.sh
+      ./.gp/install-kustomize.sh
+      echo "alias argocd='argocd --port-forward-namespace argocd'" > ~/.bashrc
     command: |
       kubectl version
       helm version
