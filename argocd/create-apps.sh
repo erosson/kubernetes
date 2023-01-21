@@ -13,6 +13,10 @@ create()
         "$@"
 }
 
+# Continuous delivery using argocd-image-updater.
+# Whenever we push to erosson/multiplayer, github-actions builds a docker image and pushes it to github's container registry (ghcr.io)
+# argocd-image-updater polls for changes to these images, and pushes the latest one, thanks to all these annotations.
+# https://argocd-image-updater.readthedocs.io/en/stable/basics/update-strategies/
 create test-multiplayer.erosson.org --path packages/erosson/multiplayer \
     --annotations argocd-image-updater.argoproj.io/image-list=server=ghcr.io/erosson/multiplayer/server:latest,www=ghcr.io/erosson/multiplayer/www:latest \
     --annotations argocd-image-updater.argoproj.io/server.update-strategy=digest \
