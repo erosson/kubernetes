@@ -1,5 +1,6 @@
 * nginx-ingress isn't in git yet
 * cert-manager isn't in git yet. kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml ; https://cert-manager.io/docs/installation/
+* setup argocd
 * removing letsencrypt from hello1 didn't work
 * easier dashboard access would be really nice
     * didn't we install a dashboard on our cluster? `kubectl proxy` accesses it, which is safe enough. how to preload auth? how to get a sane url?

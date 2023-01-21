@@ -1,0 +1,70 @@
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#kubernetesingress-nginx
+# https://argo-cd.readthedocs.io/en/stable/getting_started/
+#
+# https ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-http-ingress
+  namespace: argocd
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    external-dns.alpha.kubernetes.io/hostname: argocd.erosson.org
+    # external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    # cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: http
+    host: argocd.erosson.org
+  tls:
+  - hosts:
+    - argocd.erosson.org
+    secretName: argocd-secret # do not change, this is provided by Argo CD
+  # - secretName: argocd-tls
+    # hosts:
+    # - argocd.erosson.org
+    # secretName: argocd-secret # do not change, this is provided by Argo CD - but we're not using argocd's cert
+---
+# grpc ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-grpc-ingress
+  namespace: argocd
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    external-dns.alpha.kubernetes.io/hostname: grpc.argocd.erosson.org
+    # external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    # cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
+    host: grpc.argocd.erosson.org
+  tls:
+  # - secretName: grpc-argocd-tls
+    # hosts:
+    # - grpc.argocd.erosson.org
+  - hosts:
+    - grpc.argocd.erosson.org
+    secretName: argocd-secret # do not change, this is provided by Argo CD
