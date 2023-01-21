@@ -12,6 +12,10 @@ create()
         "$@"
 }
 
+create test-multiplayer.erosson.org \
+    --repo https://github.com/erosson/multiplayer.git \
+    --path k8s
+
 create test-letsencrypt-staging.erosson.org \
     --repo https://github.com/erosson/kubernetes.git \
     --path examples/test-letsencrypt-staging.erosson.org

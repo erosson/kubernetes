@@ -1,0 +1,3 @@
+[submodule "packages/erosson/multiplayer"]
+	path = packages/erosson/multiplayer
+	url = https://github.com/erosson/multiplayer
