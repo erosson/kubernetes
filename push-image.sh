@@ -11,5 +11,5 @@ git config --global user.email "erosson@users.noreply.github.com"
 git commit -m "[auto] bump \`$PACKAGE\` images to \`$TAG\`"
 
 # https://stackoverflow.com/a/69979203/2782048
-git config --unset-all http.https://github.com/.extraheader
+# git config --unset-all http.https://github.com/.extraheader
 git push
