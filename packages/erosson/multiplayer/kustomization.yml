@@ -6,9 +6,9 @@ metadata:
 
 images:
 - name: ghcr.io/erosson/multiplayer/server
-  newTag: haha
+  newTag: latest
 - name: ghcr.io/erosson/multiplayer/www
-  newTag: haha
+  newTag: latest
   
 
 resources:
