@@ -14,8 +14,11 @@ create()
 }
 
 create test-multiplayer.erosson.org --path packages/erosson/multiplayer \
-    --annotations argocd-image-updater.argoproj.io/image-list=ghcr.io/erosson/multiplayer/server,ghcr.io/erosson/multiplayer/www
-exit 0
+    --annotations argocd-image-updater.argoproj.io/image-list=server=ghcr.io/erosson/multiplayer/server:latest,www=ghcr.io/erosson/multiplayer/www:latest \
+    --annotations argocd-image-updater.argoproj.io/server.update-strategy=digest \
+    --annotations argocd-image-updater.argoproj.io/www.update-strategy=digest
+
+#exit 0
 create test-letsencrypt-staging.erosson.org --path examples/test-letsencrypt-staging.erosson.org
 create test-letsencrypt.erosson.org --path examples/test-letsencrypt.erosson.org
 create test-letsencrypt-cfproxy.erosson.org --path examples/test-letsencrypt-cfproxy.erosson.org
