@@ -59,10 +59,10 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-        - name: config-volume
-          mountPath: /config
+        - name: env-volume
+          mountPath: /env
       volumes:
-      - name: config-volume
+      - name: env-volume
         configMap:
           # defined in kustomization.yml
           name: test-multiplayer-server-env
