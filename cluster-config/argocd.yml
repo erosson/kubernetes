@@ -1,0 +1,15 @@
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-config
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/erosson/kubernetes.git
+    targetRevision: HEAD
+    path: cluster-config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
