@@ -18,12 +18,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: test-letsencrypt-staging
+    matchLabels: {} # kustomize commonLabels populates this, and spec.template.metadata.labels below
   template:
-    metadata:
-      labels:
-        app: test-letsencrypt-staging
     spec:
       containers:
       - name: hello
