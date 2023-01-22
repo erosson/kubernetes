@@ -1,0 +1,38 @@
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-multiplayer.erosson.org
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: server=ghcr.io/erosson/multiplayer/server:latest,www=ghcr.io/erosson/multiplayer/www:latest
+    argocd-image-updater.argoproj.io/server.update-strategy: digest
+    argocd-image-updater.argoproj.io/www.update-strategy: digest
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/erosson/kubernetes.git
+    targetRevision: HEAD
+    path: packages/erosson/multiplayer
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-multiplayer.erosson.org
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: server=ghcr.io/erosson/multiplayer/server:latest,www=ghcr.io/erosson/multiplayer/www:latest
+    argocd-image-updater.argoproj.io/server.update-strategy: digest
+    argocd-image-updater.argoproj.io/www.update-strategy: digest
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/erosson/kubernetes.git
+    targetRevision: HEAD
+    path: packages/erosson/multiplayer
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default

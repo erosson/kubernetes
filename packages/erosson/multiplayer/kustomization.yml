@@ -4,6 +4,9 @@ kind: Kustomization
 metadata:
   name: test-multiplayer-image
 
+commonLabels:
+  app.kubernetes.io/instance: test-multiplayer.erosson.org
+
 images:
 - name: ghcr.io/erosson/multiplayer/server
   newTag: latest
