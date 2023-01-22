@@ -1,0 +1,15 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/master/examples/image.md
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: cluster-config
+
+commonLabels:
+  app.kubernetes.io/instance: cluster-config
+  
+
+resources:
+- argocd-ingress.yml
+- argocd.yml
+- external-dns.yml
+- letsencrypt.yml
