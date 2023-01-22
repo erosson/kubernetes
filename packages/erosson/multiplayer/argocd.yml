@@ -14,6 +14,10 @@ spec:
     repoURL: https://github.com/erosson/kubernetes.git
     targetRevision: HEAD
     path: packages/erosson/multiplayer
+    directory:
+      # syncing this file would conflict with image-updater, sadly
+      # https://argocd-image-updater.readthedocs.io/en/stable/basics/update-methods/#argocd-write-back-method
+      exclude: argocd.yml
   destination:
     server: https://kubernetes.default.svc
     namespace: default

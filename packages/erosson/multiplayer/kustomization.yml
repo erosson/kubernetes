@@ -15,6 +15,6 @@ images:
   
 
 resources:
-- dont-autosync/argocd.yml
+- argocd.yml
 - server.yml
 - www.yml
