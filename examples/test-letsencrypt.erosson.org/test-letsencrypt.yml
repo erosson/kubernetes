@@ -8,8 +8,7 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-  selector:
-    app: test-letsencrypt
+  selector: {} # from kustomize commonLabels
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -18,12 +17,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: test-letsencrypt
+    matchLabels: {} # from kustomize commonLabels
   template:
-    metadata:
-      labels:
-        app: test-letsencrypt
     spec:
       containers:
       - name: hello
