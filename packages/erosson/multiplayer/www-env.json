@@ -1,0 +1,4 @@
+{
+  "SERVER_URL": "https://api-test-multiplayer.erosson.org",
+  "SOCKET_URL": "wss://api-test-multiplayer.erosson.org"
+}

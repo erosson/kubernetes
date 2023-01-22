@@ -11,29 +11,6 @@ spec:
   selector:
     app: test-multiplayer-server
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: test-multiplayer-server
-  # namespace: hugo-site
-spec:
-  # need 3 pods for reliability, but I'm still learning, and also a cheapass
-  replicas: 1
-  selector:
-    matchLabels:
-      app: test-multiplayer-server
-  template:
-    metadata:
-      labels:
-        app: test-multiplayer-server
-    spec:
-      containers:
-      - name: test-multiplayer-server
-        image: ghcr.io/erosson/multiplayer/server:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -59,3 +36,33 @@ spec:
             name: test-multiplayer-server
             port:
               number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-multiplayer-server
+spec:
+  # need 3 pods for reliability, but I'm still learning, and also a cheapass
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-multiplayer-server
+  template:
+    metadata:
+      labels:
+        app: test-multiplayer-server
+    spec:
+      containers:
+      - name: test-multiplayer-server
+        image: ghcr.io/erosson/multiplayer/server:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+      volumes:
+      - name: config-volume
+        configMap:
+          # defined in kustomization.yml
+          name: test-multiplayer-server-env
