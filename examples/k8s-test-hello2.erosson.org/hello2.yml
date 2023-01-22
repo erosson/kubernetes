@@ -13,8 +13,7 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-  selector:
-    app: hello-two
+  selector: {} # from kustomize commonLabels
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,12 +22,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: hello-two
+    matchLabels: {} # from kustomize commonLabels
   template:
-    metadata:
-      labels:
-        app: hello-two
     spec:
       containers:
       - name: hello-ingress
