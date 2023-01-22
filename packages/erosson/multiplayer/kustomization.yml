@@ -15,6 +15,5 @@ images:
   
 
 resources:
-- argocd.yml
 - server.yml
 - www.yml
