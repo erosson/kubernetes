@@ -60,8 +60,10 @@ spec:
         - containerPort: 3000
         volumeMounts:
         - name: env-volume
+          readOnly: true
           mountPath: /app/server/env
         - name: secret-volume
+          readOnly: true
           mountPath: /app/server/secret
       volumes:
       - name: env-volume
@@ -69,6 +71,6 @@ spec:
           # defined in kustomization.yml
           name: test-multiplayer-server-env
       - name: secret-volume
-        configMap:
+        secret:
           # defined in the secrets repo
-          name: test-multiplayer-server-secret
+          secretName: test-multiplayer-server-secret

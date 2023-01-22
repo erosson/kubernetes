@@ -11,6 +11,7 @@ tasks:
       ./argocd/auth.sh
       ./.gp/install-argocd-image-updater-cli.sh
       ./.gp/install-kustomize.sh
+      ./.gp/clone-secrets.sh
       echo "alias argocd='argocd --port-forward-namespace argocd'" >> ~/.bashrc
     command: |
       kubectl version
