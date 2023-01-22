@@ -8,8 +8,7 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-  selector:
-    app: test-letsencrypt-staging
+  selector: {} # from kustomize commonLabels
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -18,7 +17,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels: {} # kustomize commonLabels populates this, and spec.template.metadata.labels below
+    matchLabels: {} # from kustomize commonLabels
   template:
     spec:
       containers:
