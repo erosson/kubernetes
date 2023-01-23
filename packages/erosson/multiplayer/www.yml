@@ -45,6 +45,8 @@ metadata:
 spec:
   # need 3 pods for reliability, but I'm still learning, and also a cheapass
   replicas: 1
+  # no need for kubernetes rollback history, I'd rather manage rollbacks with git
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: test-multiplayer-www
