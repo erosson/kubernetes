@@ -9,6 +9,8 @@ metadata:
     argocd-image-updater.argoproj.io/main.update-strategy: digest
 spec:
   project: default
+  syncPolicy:
+    automated: {}
   source:
     repoURL: https://github.com/erosson/kubernetes.git
     targetRevision: HEAD
